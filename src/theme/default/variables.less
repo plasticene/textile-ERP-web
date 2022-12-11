@@ -1,0 +1,18 @@
+@gutter: 24px;
+
+// font size
+@font-size-sm: 13px;
+@font-size-base: 14px;
+// @font-size-md:15px;
+@font-size-md: 16px;
+@font-size-lg: 18px;
+
+@bg-color:#f5f7f9;
+
+.ellipsis(@var) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @var;
+  -webkit-box-orient: vertical;
+}

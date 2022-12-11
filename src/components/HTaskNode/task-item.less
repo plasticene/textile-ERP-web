@@ -1,0 +1,110 @@
+@taskItem: h-task-item;
+
+.@{taskItem} {
+  // margin-bottom: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 48px;
+  &.is-disabled {
+    opacity: 0.7;
+    min-height: 32px;
+
+    .@{taskItem}-dot {
+      background-color: transparent;
+      border: 1px solid var(--color-neutral-6);
+    }
+  }
+  &:not(.is-disabled) {
+    cursor: pointer;
+
+    &:hover {
+      .@{taskItem}-content {
+        background-color: var(--color-fill-2);
+      }
+    }
+
+    &.is-selected {
+      .@{taskItem}-content {
+        background-color: var(--color-neutral-2);
+      }
+      .@{taskItem}-line {
+        border-color: var(--color-neutral-6);
+      }
+      .@{taskItem}-dot {
+        transform: scale(1.4);
+      }
+    }
+  }
+
+  &-content {
+    margin-left: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 2px;
+  }
+
+  &-tail {
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    left: 0px;
+  }
+
+  &-line {
+    width: 1px;
+    border-left-width: 1px;
+    border-color: var(--color-neutral-4);
+    left: 50%;
+    transform: translateX(-50%);
+    top: 22.0005px;
+    bottom: -9.0005px;
+    position: absolute;
+    border-left-style: solid;
+    transition: all 0.3s ease;
+  }
+
+  &-dot {
+    &-wrap {
+      top: 5px;
+      width: 6px;
+      height: 22.001px;
+      line-height: 22.001px;
+      position: relative;
+    }
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--border-radius-circle);
+    box-sizing: border-box;
+    color: rgb(var(--primary-6));
+    margin-top: -50%;
+    position: relative;
+    top: 50%;
+    left: 0;
+    background-color: var(--green-6);
+    transition: all 0.3s ease;
+  }
+  &-desc {
+    font-size: 12px;
+    opacity: .8;
+    margin-top: 4px;
+  }
+  &-tag {
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 2px;
+    position: relative;
+    padding: 0px 4px;
+    &-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.1;
+      left: 0;
+      top: 0;
+      border-radius: var(--border-radius-small);
+    }
+  }
+}

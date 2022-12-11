@@ -1,0 +1,7 @@
+export { default as bills } from './bills'
+export { default as machine } from './machine'
+export { default as material } from './material'
+export { default as order } from './order'
+export { default as product } from './product'
+export { default as report } from './report'
+export { default as settings } from './settings'

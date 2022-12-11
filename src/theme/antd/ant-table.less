@@ -1,0 +1,61 @@
+.ant-table-thead {
+  tr {
+    th {
+      &.ant-table-column-has-actions {
+        &.ant-table-column-has-sorters:hover {
+          background-color: var(--color-fill-1);
+        }
+        &.ant-table-column-has-filters {
+          &:hover {
+            .anticon-filter,
+            .anticon-filter:hover {
+              background-color: var(--color-fill-1);
+            }
+          }
+          .anticon-filter.ant-table-filter-open {
+            background-color: var(--color-fill-1);
+          }
+        }
+      }
+    }
+  }
+}
+.ant-table-fixed-header .ant-table-body-inner {
+  overflow-y: auto !important;
+  overflow-y: overlay !important;
+}
+.ant-table-fixed-header .ant-table-scroll .ant-table-header {
+  overflow-y: auto !important;
+  overflow-y: overlay !important;
+}
+.ant-table-fixed-header .ant-table-body-inner::-webkit-scrollbar {
+  background: #fff;
+}
+.ant-table-fixed-header .ant-table-body-inner::-webkit-scrollbar:hover {
+  background: #fff;
+}
+
+.ant-table-tbody
+  > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-tbody
+  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-thead
+  > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-thead
+  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td {
+  background: var(--color-fill-1);
+}
+
+
+body .ant-card-body {
+  padding: 16px;
+}
+
+
+.ant-table-body {
+  z-index: 1;
+}

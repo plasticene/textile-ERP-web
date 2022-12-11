@@ -1,0 +1,19 @@
+# editorconfig document
+# https://editorconfig.org/
+# editorconfig顶级配置文件,停止向上寻找配置文件
+root = true
+
+[*]
+# change these settings to your own preference
+# 将这些设置更改为您自己的首选项
+# 缩进样式=空格
+indent_style = space
+# 缩进大小=2
+indent_size = 2
+
+# 换行符类型 = CRLF
+end_of_line = CRLF
+
+
+# 删除行尾空格 = 是
+trim_trailing_whitespace = true

@@ -1,0 +1,100 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-18 14:32:25
+ * @LastEditTime: 2022-02-25 18:55:57
+ * @LastEditors: Agan
+ * @Description: In User Settings Edit
+ * @FilePath: \zjhcsoft-web-component\src\components\menu\SideMenu.vue
+-->
+<template>
+  <a-layout-sider
+    v-model="collapsed"
+    :theme="sideTheme"
+    :class="['side-menu', 'beauty-scroll', isMobile ? null : 'shadow']"
+    width="256px"
+    :collapsible="collapsible"
+    :trigger="null"
+  >
+    <div :class="['hccwp-logo', theme]">
+      <a class="main-system" href="/hccwp-index/">
+        <img :src="logoUrl" />
+        <div v-if="!collapsed" class="title">
+          <h1>鸿 程 系 统</h1>
+          <label>HONGCHENG SYSTEMS</label>
+        </div>
+      </a>
+      <hccwp-system-list :system-name="systemName" />
+    </div>
+    <i-menu
+      :theme="theme"
+      :collapsed="collapsed"
+      :options="menuData"
+      class="menu"
+      @select="onSelect"
+    />
+  </a-layout-sider>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+
+import LOGO_URL from '@/assets/img/logo.png'
+import LOGO_DEV_URL from '@/assets/img/logo-dev.png'
+import LOGO_TEST_URL from '@/assets/img/logo-test.png'
+
+import HccwpSystemList from './HccwpSystemList'
+import IMenu from './menu'
+
+const LOGO_MAP = {
+  development: LOGO_DEV_URL,
+  production: LOGO_URL,
+  test: LOGO_TEST_URL
+}
+export default {
+  name: 'SideMenu',
+  components: {
+    IMenu,
+    HccwpSystemList
+  },
+  props: {
+    collapsible: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    collapsed: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    menuData: {
+      type: Array,
+      required: true
+    },
+    theme: {
+      type: String,
+      required: false,
+      default: 'dark'
+    }
+  },
+  inject: ['env'],
+  computed: {
+    sideTheme() {
+      return this.theme == 'light' ? this.theme : 'dark'
+    },
+    ...mapState('setting', ['isMobile', 'systemName']),
+    logoUrl({ env }) {
+      return LOGO_MAP[env] ? LOGO_MAP[env] : LOGO_URL
+    }
+  },
+  methods: {
+    onSelect(obj) {
+      this.$emit('menuSelect', obj)
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+@import 'index';
+</style>

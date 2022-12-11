@@ -1,0 +1,50 @@
+each(range(10), {
+  .op-@{value} {
+    opacity: (@value * 0.1);
+  }
+});
+
+each(range(15), {
+  .mb-@{value}x {
+    margin-bottom: (@value * 4px);
+  }
+});
+each(range(15), {
+  .mt-@{value}x {
+    margin-top: (@value * 4px);
+  }
+});
+each(range(15), {
+  .ml-@{value}x {
+    margin-left: (@value * 4px);
+  }
+});
+each(range(15), {
+  .mr-@{value}x {
+    margin-right: (@value * 4px);
+  }
+});
+
+each(range(15), {
+  .pdr-@{value}x {
+    padding-right: (@value * 4px);
+  }
+});
+
+each(range(15), {
+  .pdl-@{value}x {
+    padding-left: (@value * 4px);
+  }
+});
+
+each(range(15), {
+  .pdt-@{value}x {
+    padding-top: (@value * 4px);
+  }
+});
+
+each(range(15), {
+  .pdb-@{value}x {
+    padding-bottom: (@value * 4px);
+  }
+});

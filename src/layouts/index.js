@@ -1,0 +1,5 @@
+export { default as EmptyPage } from '../pages/EmptyPage.vue'
+export { default as BlankView } from './BlankView.vue'
+export { default as HRouterView } from './RouterView.vue'
+export { default as TabsView } from './tabs/HccwpTabsView.vue'
+export { default as WebView } from './WebView.vue'

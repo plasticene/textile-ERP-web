@@ -1,0 +1,13 @@
+{
+  "files.eol": "\r\n",
+  "i18n-ally.localesPaths": ["src/i18n"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue"
+  ],
+  "cSpell.words": [
+    "doctag",
+    "hljs"
+  ]
+}

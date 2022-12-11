@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "baseUrl": ".",
+    "strict": true,
+    "module": "esnext",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "types": ["./auto-imports"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*.js"],
+  "vueCompilerOptions": {
+    "target": 2.7
+  },
+}

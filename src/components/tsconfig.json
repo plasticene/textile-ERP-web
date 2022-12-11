@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "../../types",
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../../src/*"],
+      "vue": ["node_modules/vue"],
+      "vue/*": ["node_modules/vue/*"],
+    }
+  }
+}

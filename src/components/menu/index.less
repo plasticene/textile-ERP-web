@@ -1,0 +1,131 @@
+.shadow {
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+}
+.side-menu {
+  min-height: 100vh;
+  overflow-y: overlay;
+  z-index: 20;
+  background-color: #fff;
+  .logo {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    line-height: 32px;
+    margin: 16px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    overflow: hidden;
+    background-color: @layout-trigger-background;
+    &.light {
+      background-color: #fff;
+      h1 {
+        color: var(--primary-color);
+      }
+    }
+    h1 {
+      color: @menu-dark-highlight-color;
+      font-size: 20px;
+      margin: 0 0 0 12px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    img {
+      width: 40px;
+      vertical-align: middle;
+    }
+  }
+  .hccwp-logo {
+    height: 124px;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    overflow: hidden;
+    background-color: @layout-trigger-background;
+    &.light {
+      background-color: #fff;
+      h1 {
+        color: var(--primary-color);
+      }
+    }
+    .main-system {
+      display: flex;
+      align-items: center;
+      height: 64px;
+      padding: 24px;
+      .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h1 {
+          color: @menu-dark-highlight-color;
+          font-size: 24px;
+          line-height: 24px;
+          padding-bottom: 4px;
+          border-bottom: 1px solid @gray-7;
+          margin: 0;
+          margin-bottom: 3px;
+        }
+        label {
+          color: @menu-dark-highlight-color;
+          font-size: 12px;
+          letter-spacing: 1px;
+          line-height: 10px;
+          transform: scale(0.8);
+        }
+      }
+    }
+    .sub-system {
+      padding: 16px 24px;
+      &.title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        color: @sub-title-color;
+        cursor: pointer;
+        h1 {
+          flex: 1;
+          color: @sub-title-color;
+          margin: 0;
+        }
+      }
+    }
+    img {
+      width: 40px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  }
+  &.ant-layout-sider-collapsed {
+    .logo {
+      .main-system {
+        .title {
+          display: none;
+        }
+      }
+    }
+    .sub-system {
+      justify-content: center;
+      h1 {
+        display: none;
+      }
+    }
+  }
+}
+.menu {
+  padding: 16px 0;
+  background-color: #fff;
+}
+
+.system-list {
+  width: 360px;
+  display: flex;
+  flex-wrap: wrap;
+  a {
+    margin: 8px;
+  }
+}
+.pop-title {
+  font-weight: bold;
+  color: @sub-title-color;
+}

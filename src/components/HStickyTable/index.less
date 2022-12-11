@@ -1,0 +1,89 @@
+.vc-sticky-table {
+  .ant-table-scroll {
+    overflow: unset !important;
+  }
+  &.is-sticky-table {
+    .ant-table-fixed-header
+      > .ant-table-content
+      > .ant-table-scroll
+      > .ant-table-body {
+      // 兼容火狐浏览器
+      scrollbar-width: none;
+      margin-top: 12px;
+      &::-webkit-scrollbar-thumb {
+        background-color: transparent !important;
+      }
+    }
+
+    .ant-table-fixed-header {
+      .ant-table-scroll .ant-table-header {
+        // 兼容火狐浏览器
+        scrollbar-width: none;
+        position: sticky;
+        top: var(--header-top);
+        z-index: 6;
+      }
+
+      .ant-table-fixed-left,
+      .ant-table-fixed-right {
+        overflow: unset;
+        z-index: 8;
+        .ant-table-body-outer {
+          overflow: hidden;
+        }
+        .ant-table-header {
+          position: sticky;
+          top: var(--header-top);
+          z-index: 108;
+        }
+      }
+
+      .ant-table-header.ant-table-hide-scrollbar::-webkit-scrollbar {
+        height: 0px !important;
+        width: 0px !important;
+      }
+    }
+  }
+}
+
+.vc-sticky-table-wrapper {
+  .scroll-footer-wrapper {
+    position: sticky;
+    height: 0;
+    z-index: 9;
+    bottom: var(--scroll-bar-bottom);
+  }
+
+  .scroll-footer {
+    height: 14px;
+    overflow-x: auto;
+    // 兼容火狐浏览器
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    overflow-x: overlay;
+    width: 100%;
+    transform: translateY(-14px);
+    &:hover {
+      // 兼容火狐浏览器
+      scrollbar-color: rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.03);
+    }
+    i {
+      display: block;
+      height: 100%;
+    }
+  }
+
+  &.has-pagination {
+    .ant-table-pagination.ant-pagination {
+      width: 100%;
+      position: sticky;
+      text-align: right;
+      bottom: var(--pagination-bottom);
+      z-index: 10;
+      background: var(--white--fade--65);
+      margin: 0;
+      padding: 8px 0;
+      backdrop-filter: blur(10px);
+    }
+  }
+}

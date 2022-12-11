@@ -1,0 +1,251 @@
+@font-face {
+  font-family: 'Mi-Sans-N-Regular';
+  src: url('~@/assets/fonts/MiSans-Regular.eot');
+  src: url('~@/assets/fonts/MiSans-Regular.eot?#font-spider')
+      format('embedded-opentype'),
+    url('~@/assets/fonts/MiSans-Regular.woff') format('woff'),
+    url('~@/assets/fonts/MiSans-Regular.ttf') format('truetype'),
+    url('~@/assets/fonts/MiSans-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mi-Sans-N-Medium';
+  src: url('~@/assets/fonts/MiSans-Medium.eot');
+  src: url('~@/assets/fonts/MiSans-Medium.eot?#font-spider')
+      format('embedded-opentype'),
+    url('~@/assets/fonts/MiSans-Medium.woff') format('woff'),
+    url('~@/assets/fonts/MiSans-Medium.ttf') format('truetype'),
+    url('~@/assets/fonts/MiSans-Medium.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: -apple-system, Mi-Sans-N-Regular, Roboto, BlinkMacSystemFont,
+    Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue,
+    Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+  background-color: rgb(247,249,250);
+}
+
+
+.h-full {
+  height: 100%;
+}
+.h-half {
+  height: 50%;
+}
+.w-full {
+  width: 100%;
+}
+.w-half {
+  width: 50%;
+}
+
+.flex {
+  display: flex;
+}
+.flex-center {
+  .flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-space-between {
+  .flex;
+  justify-content: space-between;
+}
+.flex-align-center {
+  .flex;
+  align-items: center;
+}
+.flex-end {
+  .flex;
+  justify-content: flex-end;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.relative {
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+}
+
+// 弱眼模式
+.week-mode {
+  overflow: hidden;
+  filter: invert(80%);
+}
+
+.beauty-scroll,
+.scroll-bar {
+  scrollbar-color: var(--primary-color);
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+  position: relative;
+  overflow-y: overlay !important;
+  ::-webkit-scrollbar {
+    width: 12px !important;
+    height: 12px !important;
+    background: transparent;
+    filter: invert();
+  }
+  ::-webkit-scrollbar:hover {
+    background: rgba(128, 128, 128, 0.2);
+  }
+  ::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(255, 255, 255, 0) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    z-index: 2147483647;
+    -webkit-border-radius: 12px;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-corner {
+    background: rgba(255, 255, 255, 0);
+    border: 1px solid transparent;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+}
+
+// 修改table，select 的滚动条样式
+.ant-table-scroll,
+.ant-table-body,
+.ant-select-dropdown-menu {
+  .scroll-bar;
+}
+
+// 修改侧边栏的滚动条样式
+.ant-layout-sider-dark {
+  // color: #ddd;
+  &::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(255, 255, 255, 0) !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    z-index: 2147483647;
+    -webkit-border-radius: 12px;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+  }
+  &::-webkit-scrollbar-thumb:active {
+    background-color: rgba(255, 255, 255, 0.45) !important;
+  }
+  &::-webkit-scrollbar:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// 列表页添加padding-bottom 为 0
+.table-page,
+.page-list.page-container {
+  padding-bottom: 0 !important;
+}
+
+.split-right {
+  &:not(:last-child) {
+    border-right: 1px solid rgba(98, 98, 98, 0.2);
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: var(--color-fill-3);
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(2%, 0, 0) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0%, 0, 0) scale(1);
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translate3d(0%, 0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(2%, 0, 0) scale(0.99);
+  }
+}
+
+// for html to pdf
+.html2pdf__page-break {
+  margin: 16px 0;
+  height: 1px;
+}
+
+// 分段式 tab 切换样式
+.h-tabs {
+  .ant-tabs-bar {
+    border-bottom: 0;
+  }
+  .ant-tabs-nav {
+    background-color: var(--color-fill-2);
+    padding: 4px;
+    border-radius: var(--border-radius-medium);
+    .ant-tabs-tab {
+      z-index: 2;
+      margin-right: 0;
+      padding: 4px 12px;
+      // color:var(--color-white)
+    }
+  }
+
+  .ant-tabs-ink-bar {
+    height: calc(100% - 8px);
+    z-index: 0;
+    background-color: var(--color-bg-1);
+    bottom: 4px;
+    border-radius: var(--border-radius-small);
+  }
+}
+
+// primary tag style
+.h-tag {
+  padding: 1px 3px;
+  display: inline-block;
+  background: var(--color-fill-2);
+  font-size: 12px;
+  line-height: 16.8px;
+}
+
+// 添加一个背景
+.has-bg {
+  background-color: var(--color-fill-1);
+}

@@ -1,0 +1,6 @@
+import 'ant-design-vue/dist/antd.less'
+import './antd/index.less'
+import './mixin.less'
+import './nprogress.less'
+import './theme-var.less'
+import './style.less'

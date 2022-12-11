@@ -1,0 +1,156 @@
+@prefix: h-image-preview;
+// 动画
+@anim-time-fn-enter: cubic-bezier(0.38, 0, 0.24, 1);
+@anim-time-fn-exit: cubic-bezier(0, 0, 0.15, 1);
+@anim-time-fn-ease-in: cubic-bezier(0.82, 0, 1, 0.9);
+@anim-duration: 0.3s;
+@anim-duration-base: 0.2s;
+@anim-duration-moderate: 0.24s;
+@anim-duration-slow: 0.28s;
+
+@keyframes tDialogFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tDialogFadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tDialogZoomIn {
+  // 解决弹窗中带有动效的Icon不展示（如loading），初始scale为1可以展示正常
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  1% {
+    opacity: 1;
+    transform: scale(0.01);
+  }
+}
+
+@keyframes tDialogZoomOut {
+  to {
+    opacity: 0;
+    transform: scale(0.01);
+  }
+}
+
+@keyframes tDialogMaskIn {
+  from {
+    opacity: 1;
+  }
+}
+
+@keyframes tDialogMaskOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-mask-show {
+  0% {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-mask-hide {
+  0% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-image-show {
+  0% {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.animation-enter {
+  animation-duration: @anim-duration;
+  animation-fill-mode: both;
+  animation-timing-function: @anim-time-fn-enter;
+  animation-play-state: paused;
+}
+
+.animation-exit {
+  animation-duration: @anim-duration;
+  animation-fill-mode: both;
+  animation-timing-function: @anim-time-fn-exit;
+  animation-play-state: paused;
+}
+
+.animation-active {
+  animation-play-state: running;
+  animation-fill-mode: both;
+}
+
+.zoom {
+  &__vue {
+    &-enter-active {
+      .@{prefix}-body,
+      .@{prefix}-utils {
+        animation-name: tDialogZoomIn;
+        .animation-enter;
+      }
+
+      .h-mask,
+      .@{prefix}-close {
+        animation-name: tDialogMaskIn;
+        .animation-active;
+      }
+    }
+
+    &-leave-active {
+      .@{prefix}-body,
+      .@{prefix}-utils {
+        animation-name: tDialogZoomOut;
+        .animation-exit;
+      }
+
+      .h-mask,
+      .@{prefix}-close {
+        animation-name: tDialogMaskOut;
+        .animation-active;
+      }
+    }
+
+    &-enter-to {
+      .@{prefix}-body,
+      .@{prefix}-utils {
+        .animation-active;
+      }
+    }
+
+    &-leave-to {
+      .@{prefix}-body,
+      .@{prefix}-utils {
+        .animation-active;
+      }
+    }
+  }
+}
