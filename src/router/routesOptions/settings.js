@@ -18,7 +18,8 @@ export default {
           // closable: false
         }
       },
-      component: () => import('@/pages/dashboard/workplace')
+      // component: () => import('@/pages/dashboard/workplace')
+      component: EmptyPage
     },
     {
       path: 'rule',
