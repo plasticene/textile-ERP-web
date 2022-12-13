@@ -14,9 +14,7 @@ export default {
       path: 'workshop',
       name: '车间',
       meta: {
-        page: {
-          // closable: false
-        }
+        title: '车间'
       },
       // component: () => import('@/pages/dashboard/workplace')
       component: EmptyPage
@@ -24,36 +22,57 @@ export default {
     {
       path: 'rule',
       name: '岗位',
+      meta: {
+        title: '岗位'
+      },
       component: EmptyPage
     },
     {
       path: 'staff',
       name: '员工',
+      meta: {
+        title: '员工'
+      },
       component: EmptyPage
     },
     {
       path: 'customer',
-      name: '客户',
+      name: '配置客户',
+      meta: {
+        title: '客户'
+      },
       component: EmptyPage
     },
     {
       path: 'supplier',
-      name: '供应商',
+      name: '配置供应商',
+      meta: {
+        title: '供应商'
+      },
       component: EmptyPage
     },
     {
       path: 'factory',
-      name: '代工厂',
+      name: '配置代工厂',
+      meta: {
+        title: '代工厂'
+      },
       component: EmptyPage
     },
     {
       path: 'company',
       name: '公司',
+      meta: {
+        title: '公司'
+      },
       component: EmptyPage
     },
     {
       path: 'cost',
       name: '运营成本',
+      meta: {
+        title: '运营成本'
+      },
       component: EmptyPage
     }
   ]

@@ -14,20 +14,24 @@ export default {
       path: 'list',
       name: '机台管理',
       meta: {
-        page: {
-          // closable: false
-        }
+        title: '机台管理'
       },
       component: EmptyPage
     },
     {
       path: 'maintain',
       name: '机台维护',
+      meta: {
+        title: '机台维护'
+      },
       component: EmptyPage
     },
     {
       path: 'config',
       name: '机台设置',
+      meta: {
+        title: '机台设置'
+      },
       component: EmptyPage
     }
   ]

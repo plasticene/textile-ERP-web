@@ -12,32 +12,42 @@ export default {
   children: [
     {
       path: 'overview',
-      name: '总览',
+      name: '报表总览',
       meta: {
-        page: {
-          // closable: false
-        }
+        title: '总览'
       },
       component: EmptyPage
     },
     {
       path: 'material',
-      name: '原料',
+      name: '报表原料',
+      meta: {
+        title: '原料'
+      },
       component: EmptyPage
     },
     {
       path: 'product',
-      name: '成品',
+      name: '报表成品',
+      meta: {
+        title: '成品'
+      },
       component: EmptyPage
     },
     {
       path: 'manufacture',
-      name: '生产',
+      name: '报表生产',
+      meta: {
+        title: '生产'
+      },
       component: EmptyPage
     },
     {
       path: 'bill',
-      name: '账单',
+      name: '报表账单',
+      meta: {
+        title: '账单'
+      },
       component: EmptyPage
     }
   ]

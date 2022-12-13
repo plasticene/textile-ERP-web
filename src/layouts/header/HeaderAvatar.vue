@@ -4,14 +4,17 @@
       <span class="name">{{ user.name || '绍兴超牛逼最厉害纺织厂' }}</span>
     </div>
     <a-menu slot="overlay" :class="['avatar-menu']">
-      <a-menu-item>
+      <a-menu-item v-for="item in user.orgList" :key="item.id">
+        <span>{{ item.name }}</span>
+      </a-menu-item>
+      <!-- <a-menu-item>
         <a-icon type="user" />
         <span>个人中心</span>
       </a-menu-item>
       <a-menu-item>
         <a-icon type="setting" />
         <span>设置</span>
-      </a-menu-item>
+      </a-menu-item> -->
       <a-menu-divider />
       <a-menu-item @click="logout">
         <a-icon style="margin-right: 8px" type="poweroff" />

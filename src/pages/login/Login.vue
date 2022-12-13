@@ -2,10 +2,10 @@
   <common-layout>
     <div class="top">
       <div class="header">
-        <img alt="logo" class="logo" src="@/assets/img/logo.png" />
+        <!-- <img alt="logo" class="logo" src="@/assets/img/logo.png" /> -->
         <span class="title">{{ systemName }}</span>
       </div>
-      <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+      <!-- <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div> -->
     </div>
     <div class="login">
       <a-form :form="form" @submit="onSubmit">
@@ -28,7 +28,7 @@
                 v-decorator="[
                   'name',
                   {
-                    initialValue: 'admin',
+                    initialValue: '16666688888',
                     rules: [
                       {
                         required: true,
@@ -50,7 +50,7 @@
                 v-decorator="[
                   'password',
                   {
-                    initialValue: '888888',
+                    initialValue: 'ptc666888',
                     rules: [
                       {
                         required: true,
@@ -95,10 +95,10 @@
             </a-form-item>
           </a-tab-pane>
         </a-tabs>
-        <div>
+        <!-- <div>
           <a-checkbox :checked="true">自动登录</a-checkbox>
           <a style="float: right">忘记密码</a>
-        </div>
+        </div> -->
         <a-form-item>
           <a-button
             :loading="logging"
@@ -110,7 +110,7 @@
             登录
           </a-button>
         </a-form-item>
-        <div>
+        <!-- <div>
           其他登录方式
           <a-icon class="icon" type="alipay-circle" />
           <a-icon class="icon" type="taobao-circle" />
@@ -118,7 +118,7 @@
           <router-link style="float: right" to="/dashboard/workplace">
             注册账户
           </router-link>
-        </div>
+        </div> -->
       </a-form>
     </div>
   </common-layout>
@@ -128,7 +128,7 @@
 import { mapMutations } from 'vuex'
 
 import CommonLayout from '@/layouts/CommonLayout'
-import { getRoutesConfig, login } from '@/services/user'
+import { login, switchOrg } from '@/services/user'
 import { setAuthorization } from '@/utils/request'
 import { loadRoutes } from '@/utils/routerUtil'
 
@@ -154,9 +154,9 @@ export default {
       this.form.validateFields(err => {
         if (!err) {
           this.logging = true
-          const name = this.form.getFieldValue('name')
+          const username = this.form.getFieldValue('name')
           const password = this.form.getFieldValue('password')
-          login(name, password).then(this.afterLogin)
+          login(username, password).then(this.afterLogin)
         }
       })
     },
@@ -164,21 +164,28 @@ export default {
       this.logging = false
       const loginRes = res.data
       if (loginRes.code >= 0) {
-        const { user, permissions, roles } = loginRes.data
-        this.setUser(user)
-        this.setPermissions(permissions)
-        this.setRoles(roles)
+        const { isAdmin, orgList } = loginRes.data
+        this.setUser(loginRes.data)
+        // this.setPermissions(permissions)
+        // this.setRoles(roles)
         setAuthorization({
-          token: loginRes.data.token,
-          expireAt: new Date(loginRes.data.expireAt)
+          token: loginRes.data.token
+          // expireAt: new Date(loginRes.data.expireAt)
         })
-        // 获取路由配置
-        getRoutesConfig().then(result => {
-          const routesConfig = result.data.data
-          loadRoutes(routesConfig)
-          this.$router.push('/dashboard/workplace')
-          this.$message.success(loginRes.message, 3)
-        })
+        if (isAdmin && orgList?.length) {
+          switchOrg(orgList[0].id).then(() => {
+            this.$router.push('/')
+          })
+        } else {
+          this.$router.push('/')
+        }
+
+        // // 获取路由配置
+        // getRoutesConfig().then(result => {
+        //   const routesConfig = result.data.data
+        //   loadRoutes(routesConfig)
+        //   this.$message.success(loginRes.message, 3)
+        // })
       } else {
         this.error = loginRes.message
       }

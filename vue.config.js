@@ -36,7 +36,14 @@ const isProd =
 const isDev = process.env.NODE_ENV === 'development'
 const ignoreMF = process.env.VUE_APP_IGNORE_MF === 'true'
 const isAppTest = process.env.VUE_APP_MODE === 'test'
-
+const getProxyReset = pathRewrite => {
+  return {
+    pathRewrite: { [pathRewrite]: '' },
+    ws: true,
+    changeOrigin: true,
+    cookiePathRewrite: '/'
+  }
+}
 // console.log(process.env.VUE_APP_IGNORE_MF ==='true')
 
 const ModuleFederation = name => {
@@ -71,12 +78,28 @@ const ModuleFederation = name => {
 }
 
 module.exports = defineConfig({
-  transpileDependencies: true,
-  lintOnSave: 'warning',
+  // 打包配置路径
+  publicPath: process.env.VUE_APP_PUBLIC_PATH,
+  lintOnSave: isDev,
   devServer: {
-    hot: false,
-    port: 9889
+    port: 9889,
+    proxy: {
+      // test sever
+      '/test-server': {
+        target: 'http://10.10.0.6:16688/textile',
+        ...getProxyReset('^/test-server')
+      },
+      '/dev-server': {
+        target: 'http://10.80.19.31:8000/hccwp-biz-web',
+        ...getProxyReset('^/dev-server')
+      }
+    }
   },
+  transpileDependencies: true,
+  // lintOnSave: 'warning',
+  // devServer: {
+  //   hot: false,
+  // },
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'less',

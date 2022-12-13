@@ -14,20 +14,24 @@ export default {
       path: 'list',
       name: '原料总览',
       meta: {
-        page: {
-          // closable: false
-        }
+        title: '原料总览'
       },
       component: EmptyPage
     },
     {
       path: 'config',
       name: '原料管理',
+      meta: {
+        title: '原料管理'
+      },
       component: EmptyPage
     },
     {
       path: 'attr-config',
       name: '原料属性管理',
+      meta: {
+        title: '原料属性管理'
+      },
       component: EmptyPage
     }
   ]

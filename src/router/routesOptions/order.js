@@ -12,22 +12,26 @@ export default {
   children: [
     {
       path: 'customer',
-      name: '客户',
+      name: '订单客户',
       meta: {
-        page: {
-          // closable: false
-        }
+        title: '客户'
       },
       component: EmptyPage
     },
     {
       path: 'supplier',
-      name: '供应商',
+      name: '订单供应商',
+      meta: {
+        title: '供应商'
+      },
       component: EmptyPage
     },
     {
       path: 'factory',
-      name: '代工厂',
+      name: '订单代工厂',
+      meta: {
+        title: '代工厂'
+      },
       component: EmptyPage
     }
   ]

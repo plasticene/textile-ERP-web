@@ -60,7 +60,7 @@
           :key="item.name"
           @click="onMenuSelect(item)"
         >
-          {{ item.name }}
+          {{ item.meta.title }}
         </a-menu-item>
       </a-menu>
       <a-layout-content

@@ -24,6 +24,10 @@ const resp401 = {
     const { response } = error
     if (response.status === 401) {
       message.error('无此权限')
+      const loginURL = '/#/login'
+      window.location = `${loginURL}?redirectUrl=${encodeURIComponent(
+        window.location.href
+      )}`
     }
     return Promise.reject(error)
   }
@@ -105,33 +109,39 @@ const reqCommon = {
 }
 
 const resCode = {
+  onRejected(error, options) {
+    const { message } = options
+    message.error(error.response.data.msg)
+    return Promise.reject(error)
+  },
   onFulfilled(response, options) {
     const { message } = options
     if (!response) {
       return
     }
-    // 鉴权失败，跳转到登录页
-    if (response.data.action?.redirect) {
-      // 去掉鉴权失败的提示
-      // message.warning({ content: '登录已失效，请重新登录', key: 'login' })
-      const loginURL = response.data.action.redirect
-      window.location = `${loginURL}?redirectUrl=${encodeURIComponent(
-        window.location.href
-      )}`
-    }
-    // 接口报错
-    else if (
-      response.data.code !== undefined &&
-      !(response.data.code === 0 || response.data.code === '0')
-    ) {
+    console.log(33333, response)
+    // // 鉴权失败，跳转到登录页
+    // if (response.status === 401) {
+    //   // 去掉鉴权失败的提示
+    //   // message.warning({ content: '登录已失效，请重新登录', key: 'login' })
+    //   const loginURL = '/#/login'
+    //   window.location = `${loginURL}?redirectUrl=${encodeURIComponent(
+    //     window.location.href
+    //   )}`
+    // }
+    // // 接口报错
+    // else
+    if (response.data.code !== 200) {
+      console.log(4444)
       // message.error(response.data.msg)
       message.error({
         content: response.data.msg,
-        key: response.data.msg
+        key: response.data.code
       })
 
       return Promise.reject(response)
     } else {
+      console.log(5555)
       return response
     }
   }

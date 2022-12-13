@@ -36,7 +36,7 @@ const options = {
       props: {
         env: process.env.VUE_APP_MODE
       },
-      redirect: '/base-components',
+      redirect: '/setting',
       children: [material, product, machine, order, bills, report, settings]
     }
   ]
