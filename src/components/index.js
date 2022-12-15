@@ -14,6 +14,7 @@ import HApprovalLayout from './HApprovalLayout/index.vue'
 import HButton from './HButton/index.vue'
 import HccwpAdvanceTable from './hccwpTable/AdvanceTable.vue'
 import HccwpTable from './hccwpTable/index.vue'
+import TAdvanceTable from './hccwpTable/TAdvanceTable.vue'
 import HChangeList from './HChangeList/index.vue'
 import HCollapseBtn from './HCollapseBtn/index.jsx'
 import HEmpty from './HEmpty.vue'
@@ -83,7 +84,8 @@ const components = {
   HSignModal,
   HStaffName,
   HHtmlPrint,
-  HTaskNode
+  HTaskNode,
+  TAdvanceTable
 }
 const isH = /^H/
 
@@ -127,6 +129,7 @@ export {
   PopConfirm,
   RecordState,
   StaffSelect,
+  TAdvanceTable,
   TextLoading,
   VersionInput,
   VirtualSelect,
@@ -138,9 +141,9 @@ export default {
     // console.log(vc)
     for (const key in components) {
       let name = key.replace(/(h|H)ccwp/, 'H')
-      if (!isH.test(name)) {
-        name = `H${name}`
-      }
+      // if (!isH.test(name)) {
+      //   name = `H${name}`
+      // }
       Vue.component(name, components[key])
     }
 

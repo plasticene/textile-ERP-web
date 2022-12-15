@@ -90,7 +90,7 @@ module.exports = defineConfig({
         ...getProxyReset('^/test-server')
       },
       '/dev-server': {
-        target: 'http://10.80.19.31:8000/hccwp-biz-web',
+        target: 'http://124.222.145.215:16688/textile',
         ...getProxyReset('^/dev-server')
       }
     }

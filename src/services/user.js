@@ -18,6 +18,10 @@ export async function login(name, password) {
 export async function switchOrg(orgId) {
   return request(`/user/choice/${orgId}`, POST)
 }
+// 获取登录人信息
+export async function getUserInfo() {
+  return request(`/user/info`, GET)
+}
 
 export async function getRoutesConfig() {
   return request(ROUTES, GET)

@@ -16,8 +16,7 @@ export default {
       meta: {
         title: '车间'
       },
-      // component: () => import('@/pages/dashboard/workplace')
-      component: EmptyPage
+      component: () => import('@/pages/settings/workshop')
     },
     {
       path: 'rule',

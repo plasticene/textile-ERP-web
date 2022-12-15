@@ -7,6 +7,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 
+import { getUserInfo } from '@/services'
 // import themeUtil from '@/utils/themeUtil'
 import { getI18nKey } from '@/utils/routerUtil'
 
@@ -23,6 +24,7 @@ export default {
     this.setHtmlTitle()
     this.setLanguage(this.lang)
     enquireScreen(isMobile => this.setDevice(isMobile))
+    this.getUserInfo()
   },
   mounted() {
     this.setWeekModeTheme(this.weekMode)
@@ -56,6 +58,12 @@ export default {
   },
   methods: {
     ...mapMutations('setting', ['setDevice']),
+    ...mapMutations('account', ['setUser']),
+    getUserInfo() {
+      getUserInfo().then(res => {
+        this.setUser(res.data)
+      })
+    },
     setWeekModeTheme(weekMode) {
       if (weekMode) {
         document.body.classList.add('week-mode')

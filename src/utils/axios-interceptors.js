@@ -7,9 +7,14 @@ const resp401 = {
    * @returns {*}
    */
   onFulfilled(response, options) {
+    console.log(199990, response)
     const { message } = options
-    if (response.code === 401) {
+    if (response.data.code === 401) {
       message.error('无此权限')
+      const loginURL = '/#/login'
+      window.location = `${loginURL}?redirectUrl=${encodeURIComponent(
+        window.location.href
+      )}`
     }
     return response
   },
@@ -22,6 +27,7 @@ const resp401 = {
   onRejected(error, options) {
     const { message } = options
     const { response } = error
+    console.log(19999, response)
     if (response.status === 401) {
       message.error('无此权限')
       const loginURL = '/#/login'
@@ -42,7 +48,7 @@ const resp500 = {
    */
   onFulfilled(response, options) {
     const { message } = options
-    if (response.code === 500) {
+    if (response.data.code === 500) {
       message.error('无此权限')
     }
     return response
@@ -70,7 +76,7 @@ const resp500 = {
 const resp403 = {
   onFulfilled(response, options) {
     const { message } = options
-    if (response.code === 403) {
+    if (response.data.code === 403) {
       message.error('请求被拒绝')
     }
     return response
@@ -119,21 +125,7 @@ const resCode = {
     if (!response) {
       return
     }
-    console.log(33333, response)
-    // // 鉴权失败，跳转到登录页
-    // if (response.status === 401) {
-    //   // 去掉鉴权失败的提示
-    //   // message.warning({ content: '登录已失效，请重新登录', key: 'login' })
-    //   const loginURL = '/#/login'
-    //   window.location = `${loginURL}?redirectUrl=${encodeURIComponent(
-    //     window.location.href
-    //   )}`
-    // }
-    // // 接口报错
-    // else
-    if (response.data.code !== 200) {
-      console.log(4444)
-      // message.error(response.data.msg)
+    if (response.data.code !== 200 && response.data.code !== 401) {
       message.error({
         content: response.data.msg,
         key: response.data.code
@@ -141,8 +133,7 @@ const resCode = {
 
       return Promise.reject(response)
     } else {
-      console.log(5555)
-      return response
+      return response.data
     }
   }
 }

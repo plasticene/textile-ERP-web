@@ -128,9 +128,9 @@
 import { mapMutations } from 'vuex'
 
 import CommonLayout from '@/layouts/CommonLayout'
-import { login, switchOrg } from '@/services/user'
+import { login, switchOrg } from '@/services'
 import { setAuthorization } from '@/utils/request'
-import { loadRoutes } from '@/utils/routerUtil'
+// import { loadRoutes } from '@/utils/routerUtil'
 
 export default {
   name: 'Login',
@@ -162,7 +162,7 @@ export default {
     },
     afterLogin(res) {
       this.logging = false
-      const loginRes = res.data
+      const loginRes = res
       if (loginRes.code >= 0) {
         const { isAdmin, orgList } = loginRes.data
         this.setUser(loginRes.data)

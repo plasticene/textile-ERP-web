@@ -1,3 +1,7 @@
+export const ListTableConfig = {
+  sticky: { headerTop: '-25px', scrollBarBottom: '48px' }
+}
+
 const fileIconMap = {
   xlsx: 'excel',
   jpg: 'image',

@@ -25,7 +25,8 @@ const METHOD = {
 }
 let baseURL = process.env.VUE_APP_API_BASE_URL
 if (process.env.NODE_ENV === 'development') {
-  baseURL = '/test-server'
+  baseURL = '/dev-server'
+  // baseURL = '/test-server'
   if (window.__HCCWP_REQUEST_BASE_URL) {
     baseURL = window.__HCCWP_REQUEST_BASE_URL
   }
