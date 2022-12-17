@@ -2,7 +2,7 @@
   <div class="form">
     <a-modal
       :visible="visible"
-      :title="opt === 'add' ? '新增车间' : '修改车间'"
+      :title="opt === 'add' ? '新增岗位' : '修改岗位'"
       :confirm-loading="confirmLoading"
       row-key="id"
       @ok="handleOk"
@@ -15,21 +15,15 @@
         :label-col="{ span: 4 }"
         :wrapper-col="{ span: 20 }"
       >
-        <a-form-model-item label="车间名称" prop="name">
+        <a-form-model-item label="岗位名称" prop="name">
           <a-input v-model="formData.name" :max-length="20" />
-        </a-form-model-item>
-        <a-form-model-item label="车间位置" prop="location">
-          <a-input v-model="formData.location" :max-length="20" />
-        </a-form-model-item>
-        <a-form-model-item label="备注" prop="remark">
-          <a-input v-model="formData.remark" type="textarea" />
         </a-form-model-item>
       </a-form-model>
     </a-modal>
   </div>
 </template>
-<script name="WorkshopFormModal" setup>
-import { saveWorkshop, updateWorkshop } from '@/services'
+<script name="RoleFormModal" setup>
+import { saveRole, updateRole } from '@/services'
 
 import { useForm } from '../composition'
 const props = defineProps({
@@ -54,16 +48,14 @@ const handleOk = () => {
     if (valid) {
       const param = {
         id: formData.id,
-        name: formData.name,
-        location: formData.location,
-        remark: formData.remark
+        name: formData.name
       }
       if (opt.value === 'add') {
-        saveWorkshop(param).then(() => {
+        saveRole(param).then(() => {
           handleCancel(true)
         })
       } else {
-        updateWorkshop(param).then(() => {
+        updateRole(param).then(() => {
           handleCancel(true)
         })
       }

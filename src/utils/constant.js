@@ -1,6 +1,16 @@
 export const ListTableConfig = {
   sticky: { headerTop: '-25px', scrollBarBottom: '48px' }
 }
+export const Actions = [
+  {
+    label: '编辑',
+    key: 'edit'
+  },
+  {
+    label: '删除',
+    key: 'delete'
+  }
+]
 
 const fileIconMap = {
   xlsx: 'excel',

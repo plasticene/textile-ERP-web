@@ -19,12 +19,12 @@ export default {
       component: () => import('@/pages/settings/workshop')
     },
     {
-      path: 'rule',
+      path: 'role',
       name: '岗位',
       meta: {
         title: '岗位'
       },
-      component: EmptyPage
+      component: () => import('@/pages/settings/role')
     },
     {
       path: 'staff',

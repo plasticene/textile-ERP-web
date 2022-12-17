@@ -5,14 +5,6 @@ const { POST, GET, PUT, DELETE } = METHOD
 export function getWorkshopPageList(params) {
   return request('/workshop', GET, params)
 }
-// // 查看投资信息
-// export function getWorkshop(id) {
-//   return request(`/invest/view/${id}`, GET)
-// }
-// // 查看投资信息变更记录
-// export function getInvestChangeLog(relateId) {
-//   return request(`/invest/getChangeList/${relateId}`, GET)
-// }
 // 新增车间
 export function saveWorkshop(params) {
   return request('/workshop', POST, params)

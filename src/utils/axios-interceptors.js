@@ -10,7 +10,7 @@ const resp401 = {
     console.log(199990, response)
     const { message } = options
     if (response.data.code === 401) {
-      message.error('无此权限')
+      message.error('请先登陆')
       const loginURL = '/#/login'
       window.location = `${loginURL}?redirectUrl=${encodeURIComponent(
         window.location.href
@@ -29,7 +29,7 @@ const resp401 = {
     const { response } = error
     console.log(19999, response)
     if (response.status === 401) {
-      message.error('无此权限')
+      message.error('请先登陆')
       const loginURL = '/#/login'
       window.location = `${loginURL}?redirectUrl=${encodeURIComponent(
         window.location.href
@@ -125,6 +125,7 @@ const resCode = {
     if (!response) {
       return
     }
+    console.log('%c Line:129 🍋 response', 'color:#ed9ec7', response)
     if (response.data.code !== 200 && response.data.code !== 401) {
       message.error({
         content: response.data.msg,

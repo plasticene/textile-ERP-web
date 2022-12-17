@@ -113,6 +113,8 @@ export default {
       console.log(6666, val)
       if (val.matched.length === 2 || val.redirectedFrom) {
         this.current = [this.subMenu[0]?.name]
+      } else {
+        this.current = [val.name]
       }
       this.setActivated(val)
     },
