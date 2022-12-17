@@ -1,5 +1,5 @@
 <template>
-  <div class="depDuty page-list">
+  <div class="workshop page-list">
     <TAdvanceTable
       ref="tableRef"
       row-key="id"
@@ -9,50 +9,48 @@
       v-bind="ListTableConfig"
     >
       <template #header>
-        <a-button type="primary" icon="plus" @click="handleAdd">新增</a-button>
+        <a-button type="primary" @click="handleAdd">新增车间</a-button>
       </template>
-      <template #filterBar>
-        <a-input v-decorator="['duty']" placeholder="请输入职责" />
-      </template>
-      <div slot="deptList" slot-scope="{ text }">
-        <a-tag
-          v-for="item in text"
-          :key="item.id"
-          color="blue"
-          no-border
-          class="mb-1x"
-        >
-          {{ item.name }}
-        </a-tag>
+      <!-- <template #filterBar>
+        <a-input v-decorator="['name']" placeholder="请输入职责" />
+      </template> -->
+      <div slot="machineCount" slot-scope="{ text, record }">
+        <a @click="viewMachineList(record)">{{ text ?? 0 }}</a>
       </div>
       <div slot="action" slot-scope="{ record }">
-        <a class="depDuty__button" @click="handleEdit(record)">修改</a>
+        <a class="workshop__button" @click="handleEdit(record)">编辑</a>
         <a-popconfirm
-          :title="`确定删除 ${record.duty} 职责？`"
+          v-if="!record.machineCount"
+          :title="`确定删除 ${record.name} 车间？`"
           ok-text="确定"
           cancel-text="取消"
           @confirm="handleDel(record)"
         >
-          <a class="depDuty__button depDuty__button--red">删除</a>
+          <a class="workshop__button workshop__button--red">删除</a>
         </a-popconfirm>
+        <a-tooltip v-else>
+          <template slot="title">该车间已关联机台，不可删除</template>
+          <a-button type="link" disabled>删除</a-button>
+        </a-tooltip>
       </div>
     </TAdvanceTable>
-    <DutyFormModal
+    <WorkshopFormModal
       :visible="showModal"
       :opt="opt"
-      :duty-form="dutyForm"
+      :form="formData"
       @close="handleClose"
     />
   </div>
 </template>
-<script name="DepDuty" setup>
-import { deleteDeptDuty, getWorkshopPageList } from '@/services'
+<script name="workshop" setup>
+import { delWorkshop, getWorkshopPageList } from '@/services'
 import { ListTableConfig } from '@/utils/constant'
 
-import DutyFormModal from './components/DutyFormModal'
-import { useDutyList } from './composition'
+import WorkshopFormModal from './components/WorkshopFormModal'
+import { useTable } from './composition'
 
-const { tableRef, columns, opt, showModal, dutyForm } = useDutyList()
+const { tableRef, columns, opt, showModal, formData } = useTable()
+const vm = getCurrentInstance().proxy
 const handleAdd = () => {
   opt.value = 'add'
   showModal.value = true
@@ -62,14 +60,16 @@ const handleAdd = () => {
 const handleEdit = record => {
   opt.value = 'edit'
   showModal.value = true
-  dutyForm.id = record.id
-  dutyForm.dutyName = record.duty
-  dutyForm.dutyDesc = record.memo
+  formData.id = record.id
+  formData.name = record.name
+  formData.location = record.location
+  formData.remark = record.remark
 }
 const initFormData = () => {
-  dutyForm.dutyName = ''
-  dutyForm.dutyDesc = ''
-  dutyForm.id = undefined
+  formData.name = ''
+  formData.location = ''
+  formData.remark = ''
+  formData.id = undefined
 }
 const handleClose = fresh => {
   showModal.value = false
@@ -79,12 +79,20 @@ const handleClose = fresh => {
   }
 }
 const handleDel = record => {
-  deleteDeptDuty({ id: record.id })
-  tableRef.value.reload()
+  delWorkshop(record.id).then(() => {
+    vm.$message.success('车间删除成功')
+    tableRef.value.reload()
+  })
+}
+const router = useRouter()
+// 跳转到机台列表界面，并过滤车间
+const viewMachineList = record => {
+  console.log('%c Line:90 🥥 record', 'color:#93c0a4', record)
+  router.push('/machine/list')
 }
 </script>
 <style lang="less" scoped>
-.depDuty {
+.workshop {
   &__button + &__button {
     margin-left: 16px;
   }

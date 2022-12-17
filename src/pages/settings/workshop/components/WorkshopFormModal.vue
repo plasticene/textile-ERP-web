@@ -1,8 +1,8 @@
 <template>
-  <div class="dutyForm">
+  <div class="form">
     <a-modal
       :visible="visible"
-      :title="opt === 'add' ? '新增职责' : '修改职责'"
+      :title="opt === 'add' ? '新增车间' : '修改车间'"
       :confirm-loading="confirmLoading"
       row-key="id"
       @ok="handleOk"
@@ -15,19 +15,23 @@
         :label-col="{ span: 4 }"
         :wrapper-col="{ span: 20 }"
       >
-        <a-form-model-item label="职责名称" prop="dutyName">
-          <a-input v-model="formData.dutyName" :max-length="20" />
+        <a-form-model-item label="车间名称" prop="name">
+          <a-input v-model="formData.name" :max-length="20" />
         </a-form-model-item>
-        <a-form-model-item label="职责描述" prop="dutyDesc">
-          <a-input type="textarea" v-model="formData.dutyDesc" />
+        <a-form-model-item label="车间位置" prop="location">
+          <a-input v-model="formData.location" :max-length="20" />
+        </a-form-model-item>
+        <a-form-model-item label="备注" prop="remark">
+          <a-input v-model="formData.remark" type="textarea" />
         </a-form-model-item>
       </a-form-model>
     </a-modal>
   </div>
 </template>
-<script name="DutyForm" setup>
-import { useDutyForm } from '../composition'
-import { insertDeptDuty, updateDeptDuty } from '@/services'
+<script name="WorkshopFormModal" setup>
+import { saveWorkshop, updateWorkshop } from '@/services'
+
+import { useForm } from '../composition'
 const props = defineProps({
   opt: {
     type: String,
@@ -37,37 +41,29 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  dutyForm: {
+  form: {
     type: Object
   }
 })
-const { opt, visible, dutyForm } = toRefs(props)
-const { confirmLoading, formRef, rules, formData } = useDutyForm(dutyForm)
+const { opt, visible, form } = toRefs(props)
+const { confirmLoading, formRef, rules, formData } = useForm(form)
 
-watch(
-  () => dutyForm.value.id,
-  val => {
-    formData.id = val
-    formData.dutyName = dutyForm.value.dutyName
-    formData.dutyDesc = dutyForm.value.dutyDesc
-  },
-  { immediate: true }
-)
 const emit = defineEmits(['close'])
 const handleOk = () => {
   formRef.value.validate(valid => {
     if (valid) {
       const param = {
         id: formData.id,
-        duty: formData.dutyName,
-        memo: formData.dutyDesc
+        name: formData.name,
+        location: formData.location,
+        remark: formData.remark
       }
       if (opt.value === 'add') {
-        insertDeptDuty(param).then(() => {
+        saveWorkshop(param).then(() => {
           handleCancel(true)
         })
       } else {
-        updateDeptDuty(param).then(() => {
+        updateWorkshop(param).then(() => {
           handleCancel(true)
         })
       }

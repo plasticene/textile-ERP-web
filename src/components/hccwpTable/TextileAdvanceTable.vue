@@ -73,7 +73,7 @@ import { get, isEqual, omit } from 'lodash'
 import { FilterJSX } from '@/components/filterComponent'
 import RecordState from '@/components/recordState'
 import SlotRender from '@/components/slotRender'
-import AdvanceTable from '@/components/table/advance/AdvanceTable'
+import AdvanceTable from '@/components/table/advance/TAdvanceTable'
 const isDev = process.env.NODE_ENV === 'development'
 
 const defaultPaginationKey = {
@@ -81,7 +81,7 @@ const defaultPaginationKey = {
   pageSize: 'pageSize'
 }
 export default {
-  name: 'HccwpAdvanceTable',
+  name: 'TextileAdvanceTable',
   components: { RecordState, AdvanceTable, FilterJSX, SlotRender },
   props: {
     ...omit(T.props, ['loading', 'dataSource', 'pagination']),

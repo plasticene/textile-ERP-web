@@ -21,7 +21,9 @@ const AUTH_TYPE = {
 // http method
 const METHOD = {
   GET: 'get',
-  POST: 'post'
+  POST: 'post',
+  PUT: 'put',
+  DELETE: 'delete'
 }
 let baseURL = process.env.VUE_APP_API_BASE_URL
 if (process.env.NODE_ENV === 'development') {
@@ -67,6 +69,10 @@ async function request(url, method, params, config) {
       return service.get(url, { params, ...config })
     case METHOD.POST:
       return service.post(url, params, config)
+    case METHOD.PUT:
+      return service.put(url, params, config)
+    case METHOD.DELETE:
+      return service.delete(url, { params, ...config })
     default:
       return service.get(url, { params, ...config })
   }
