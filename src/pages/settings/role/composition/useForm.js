@@ -1,27 +1,15 @@
-function useForm(form) {
-  const confirmLoading = ref(false)
+function useForm() {
   const formRef = ref(null)
   const formData = reactive({
-    name: '',
-    location: '',
-    remark: ''
+    userIds: []
   })
-  watch(
-    () => form.value.id,
-    val => {
-      formData.id = val
-      formData.name = form.value.name
-      formData.location = form.value.location
-      formData.remark = form.value.remark
-    },
-    { immediate: true }
-  )
   const rules = reactive({
-    name: [{ required: true, message: '请输入车间名称', trigger: 'blur' }],
-    location: [{ required: true, message: '请输入车间位置', trigger: 'blur' }]
+    userIds: [
+      { required: true, message: '请选择需要关联的员工', trigger: 'change' }
+    ]
   })
 
-  return { confirmLoading, formRef, rules, formData }
+  return { formRef, rules, formData }
 }
 
 export { useForm }

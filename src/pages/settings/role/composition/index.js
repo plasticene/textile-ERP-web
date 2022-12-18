@@ -1,4 +1,5 @@
 export * from './useForm'
 export * from './useMenuList'
 export * from './useRoleList'
+export * from './useStaffTable'
 export * from './useTable'

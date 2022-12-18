@@ -31,3 +31,19 @@ export function getRoleMenuList(roleId) {
 export function saveRoleMenu(params) {
   return request('/role/menu', POST, params)
 }
+// 获取当前角色绑定的员工列表
+export function getRoleStaffPageList(params) {
+  return request('/role/user', GET, params)
+}
+// 获取当前角色未绑定的员工列表
+export function getNotRelatedStaffList(params) {
+  return request('/role/no/user', GET, params)
+}
+// 添加角色关联员工
+export function addRoleStaff(params) {
+  return request('/role/user', POST, params)
+}
+// 批量移除当前岗位绑定的员工
+export function delRoleStaff(params) {
+  return request(`/role/user`, DELETE, params)
+}
