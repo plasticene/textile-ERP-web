@@ -11,6 +11,26 @@ export const Actions = [
     key: 'delete'
   }
 ]
+export const GENDER = [
+  {
+    label: '男',
+    value: 0
+  },
+  {
+    label: '女',
+    value: 1
+  }
+]
+export const STAFF_STATUS = [
+  {
+    label: '在职',
+    value: 0
+  },
+  {
+    label: '离职',
+    value: 1
+  }
+]
 
 const fileIconMap = {
   xlsx: 'excel',

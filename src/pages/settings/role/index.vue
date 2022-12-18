@@ -16,8 +16,6 @@
   </div>
 </template>
 <script name="role" setup>
-// import { getWorkshopPageList } from '@/services'
-
 import MenuList from './components/MenuList'
 import RoleList from './components/RoleList'
 import StaffTable from './components/StaffTable'

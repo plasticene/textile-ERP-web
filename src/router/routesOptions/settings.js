@@ -32,7 +32,7 @@ export default {
       meta: {
         title: '员工'
       },
-      component: EmptyPage
+      component: () => import('@/pages/settings/staff')
     },
     {
       path: 'customer',
