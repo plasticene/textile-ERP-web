@@ -27,6 +27,11 @@ function useStaffTable(roleId) {
   const showModal = ref(false)
   const staffList = ref([])
   const selectedRowKeys = ref([])
+  const getStaffList = roleId => {
+    getNotRelatedStaffList({ roleId: roleId }).then(res => {
+      staffList.value = res.data
+    })
+  }
   watch(
     () => roleId.value,
     val => {
@@ -35,13 +40,18 @@ function useStaffTable(roleId) {
         return
       }
       tableRef.value?.reload()
-      getNotRelatedStaffList({ roleId: val }).then(res => {
-        staffList.value = res.data
-      })
+      getStaffList(val)
     },
     { immediate: true }
   )
-  return { tableRef, columns, showModal, staffList, selectedRowKeys }
+  return {
+    tableRef,
+    columns,
+    showModal,
+    staffList,
+    selectedRowKeys,
+    getStaffList
+  }
 }
 
 export { useStaffTable }

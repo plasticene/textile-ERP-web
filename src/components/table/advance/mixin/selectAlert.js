@@ -1,7 +1,7 @@
 export default {
   props: {
     // 多选
-    showInfo: { type: Boolean, default: true },
+    showInfo: { type: Boolean, default: false },
     selectedRows: Array,
     checkboxProps: { type: Function, default: () => ({}) }
   },
@@ -28,7 +28,7 @@ export default {
   methods: {
     updateSelect(selectedRowKeys, selectedRows) {
       this.$emit('update:selectedRows', selectedRows)
-      this.$emit('selectedRowChange', selectedRows, selectedRowKeys)
+      this.$emit('selectedRowChange', selectedRowKeys, selectedRows)
     },
     onSelectClear() {
       this.updateSelect([], [])

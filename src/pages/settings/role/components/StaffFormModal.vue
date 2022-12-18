@@ -3,7 +3,6 @@
     <a-modal
       :visible="visible"
       title="添加员工"
-      :confirm-loading="confirmLoading"
       row-key="id"
       @ok="handleOk"
       @cancel="handleCancel(false)"

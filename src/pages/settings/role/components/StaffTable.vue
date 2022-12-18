@@ -5,10 +5,11 @@
       row-key="id"
       :scroll="{ y: 'calc(100vh - 320px)' }"
       :columns="columns"
-      :row-selection="rowSelection"
+      :selected-rows="selectedRow"
       :load-data-request="getRoleStaffPageList"
       :transform-params="transformParams"
       v-bind="ListTableConfig"
+      @selectedRowChange="onSelectChange"
     >
       <template #header>
         <a-button type="primary" size="small" @click="handleAdd">
@@ -17,8 +18,8 @@
         <a-button
           class="ml-4x"
           size="small"
-          :disabled="!selectedRowKeys.value"
-          @click="handleDel"
+          :disabled="!selectedRowKeys.length"
+          @click="handleDel(selectedRowKeys)"
         >
           批量移除
         </a-button>
@@ -50,21 +51,24 @@ const props = defineProps({
   }
 })
 const { roleId } = toRefs(props)
-const { tableRef, columns, showModal, staffList, selectedRowKeys } =
-  useStaffTable(roleId)
+const {
+  tableRef,
+  columns,
+  showModal,
+  staffList,
+  selectedRowKeys,
+  getStaffList
+} = useStaffTable(roleId)
 const vm = getCurrentInstance().proxy
-
+const selectedRow = ref([])
 const transformParams = filter => {
   filter.roleId = roleId.value
   return filter
 }
 const onSelectChange = (keys, selectedRows) => {
-  console.log('%c Line:62 🍭 selectedRows', 'color:#465975', selectedRows)
+  console.log('%c Line:62 🍭 selectedRows', 'color:#465975', keys)
+  selectedRow.value = selectedRows
   selectedRowKeys.value = keys
-}
-const rowSelection = {
-  selectedRowKeys: selectedRowKeys.value,
-  onChange: onSelectChange
 }
 
 const handleAdd = () => {
@@ -76,6 +80,7 @@ const handleClose = fresh => {
   showModal.value = false
   if (fresh) {
     tableRef.value.reload()
+    getStaffList(roleId.value)
   }
 }
 const handleDel = ids => {
@@ -88,6 +93,7 @@ const handleDel = ids => {
       }).then(() => {
         vm.$message.success('员工移除成功')
         tableRef.value.reload()
+        getStaffList(roleId.value)
       })
     }
   })

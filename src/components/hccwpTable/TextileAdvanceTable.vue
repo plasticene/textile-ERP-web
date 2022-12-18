@@ -26,6 +26,7 @@
     @change="onChange"
     @refresh="onRefresh"
     @reset="onReset"
+    @selectedRowChange="updateSelect"
   >
     <template
       v-for="columns in slotColumns"
@@ -214,6 +215,9 @@ export default {
       this.pagination.total = pagination.total
       this.getTableData()
       this.$emit('change', pagination, filters, sorter, { currentDataSource })
+    },
+    updateSelect(selectedRowKeys, selectedRows) {
+      this.$emit('selectedRowChange', selectedRowKeys, selectedRows)
     },
     renderStsColor(sts) {
       return this.stsColor[sts] || '#f5f5f5'

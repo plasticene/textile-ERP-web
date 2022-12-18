@@ -211,7 +211,9 @@ export default {
     onExpand(expanded, record) {
       this.$emit('expand', expanded, record)
     },
-
+    updateSelect(selectedRowKeys, selectedRows) {
+      this.$emit('selectedRowChange', selectedRowKeys, selectedRows)
+    },
     toggleFilerBar() {
       if (this.collapseActive) {
         this.collapseActive = ''
