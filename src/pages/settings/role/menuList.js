@@ -4,6 +4,50 @@ export const menu = [
     path: '/',
     children: [
       {
+        name: '原料',
+        path: '/material',
+        component: '原料',
+        children: [
+          {
+            name: '原料总览',
+            path: '/material/list',
+            component: '原料总览'
+          },
+          {
+            name: '原料总览',
+            path: '/material/config',
+            component: '原料总览'
+          },
+          {
+            name: '原料属性管理',
+            path: '/material/attr-config',
+            component: '原料属性管理'
+          }
+        ]
+      },
+      {
+        name: '成品',
+        path: '/product',
+        component: '成品',
+        children: [
+          {
+            name: '成品总览',
+            path: '/product/list',
+            component: '成品总览'
+          },
+          {
+            name: '成品总览',
+            path: '/product/config',
+            component: '成品总览'
+          },
+          {
+            name: '成品属性管理',
+            path: '/product/attr-config',
+            component: '成品属性管理'
+          }
+        ]
+      },
+      {
         name: '机台',
         path: '/machine',
         component: '机台',

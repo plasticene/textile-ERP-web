@@ -1,116 +1,43 @@
 <template>
-  <div class="role-list">
-    <div class="role-list__header">
-      <a-input
-        v-model="name"
-        placeholder="输入关键字搜索"
-        class="mr-2x"
-        @change="search"
-      />
-      <a-tooltip>
-        <template slot="title">新增岗位</template>
-        <a-icon type="plus" @click="handleAction('add')" />
-      </a-tooltip>
-    </div>
-    <div class="role-list__list">
-      <div
-        v-for="item in roleList"
-        :key="item.id"
-        class="role-list__item"
-        :class="current.id === item.id ? 'role-list__item--selected' : ''"
-        @click="handleSelect(item)"
-      >
-        <span class="role-list__name" :title="item.name">
-          {{ item.name }}
-        </span>
-        <a-dropdown>
-          <a-icon type="more" />
-          <a-menu slot="overlay">
-            <a-menu-item v-for="ele in Actions" :key="ele.key">
-              <a href="javascript:;" @click="handleAction(ele.key, item)">
-                {{ ele.label }}
-              </a>
-            </a-menu-item>
-          </a-menu>
-        </a-dropdown>
-      </div>
-    </div>
-    <RoleFormModal
-      :visible="showModal"
-      :opt="opt"
-      :form="formData"
-      @close="handleClose"
+  <div class="menu-list">
+    <a-tree
+      v-if="menuList.length"
+      v-model="checkedKeys"
+      checkable
+      default-expand-all
+      :tree-data="menuList"
+      :replace-fields="{
+        children: 'nodeList',
+        title: 'name',
+        key: 'id'
+      }"
+      @check="onchecked"
     />
   </div>
 </template>
 <script name="MenuList" setup>
-import { delRole } from '@/services'
-import { Actions } from '@/utils/constant'
+import { saveRoleMenu } from '@/services'
 
 import { useMenuList } from '../composition'
-import RoleFormModal from './RoleFormModal'
 const props = defineProps({
   roleId: {
     type: Number
   }
 })
 const { roleId } = toRefs(props)
-const { roleList, name, opt, showModal, formData, current, getList } =
-  useMenuList(roleId)
-const vm = getCurrentInstance().proxy
-const emit = defineEmits(['change'])
+const { checkedKeys, menuList } = useMenuList(roleId)
+// const vm = getCurrentInstance().proxy
 
-const search = () => {
-  getList()
-}
-
-const handleAction = (action, record) => {
-  switch (action) {
-    case 'add':
-      opt.value = 'add'
-      showModal.value = true
-      break
-    case 'edit':
-      opt.value = 'edit'
-      showModal.value = true
-      formData.id = record.id
-      formData.name = record.name
-      break
-    case 'delete':
-      vm.$confirm({
-        title: `确定删除 ${record.name} ?`,
-        content: '删除后，该岗位将不可用。',
-        onOk() {
-          delRole(record.id).then(() => {
-            vm.$message.success('岗位删除成功')
-            search()
-          })
-        }
-      })
-      break
-    default:
-      break
-  }
-}
-
-const handleSelect = item => {
-  current.value = item
-  emit('change', item.id)
-}
-const initFormData = () => {
-  formData.name = ''
-  formData.id = undefined
-}
-const handleClose = fresh => {
-  showModal.value = false
-  initFormData()
-  if (fresh) {
-    search()
-  }
+const onchecked = checkedKeys => {
+  console.log('%c Line:31 🍫 checkedKeys', 'color:#42b983', checkedKeys)
+  saveRoleMenu({
+    menuIds: checkedKeys,
+    roleId: roleId.value
+  })
 }
 </script>
 <style lang="less" scoped>
-.role-list {
+.menu-list {
   height: 100%;
   margin-left: 24px;
   &__header {

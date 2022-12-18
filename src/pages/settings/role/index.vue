@@ -38,6 +38,7 @@ const current = computed(() => {
   &__side {
     width: 200px;
     height: 100%;
+    margin-right: 24px;
   }
   &__content {
     flex: 1;

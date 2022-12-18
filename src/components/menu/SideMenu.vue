@@ -105,6 +105,7 @@ export default {
   &__content {
     width: 100%;
     height: calc(100vh - 96px);
+    min-height: 567px;
     margin: 16px 0;
     display: flex;
     flex-direction: column;
