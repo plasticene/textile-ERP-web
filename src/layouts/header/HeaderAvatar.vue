@@ -4,8 +4,14 @@
       <span class="name">{{ user.name || '绍兴超牛逼最厉害纺织厂' }}</span>
     </div>
     <a-menu slot="overlay" :class="['avatar-menu']">
-      <a-menu-item v-for="item in user.orgList" :key="item.id">
-        <span>{{ item.name }}</span>
+      <a-menu-item
+        v-for="item in user.orgList"
+        :key="item.id"
+        @click="switchOrg(item.id)"
+      >
+        <span :class="user.orgId === item.id ? 'select' : ''">
+          {{ item.name }}
+        </span>
       </a-menu-item>
       <!-- <a-menu-item>
         <a-icon type="user" />
@@ -27,7 +33,7 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import { logout } from '@/services/user'
+import { logout, switchOrg } from '@/services/user'
 
 export default {
   name: 'HeaderAvatar',
@@ -38,6 +44,14 @@ export default {
     logout() {
       logout()
       this.$router.push('/login')
+    },
+    switchOrg(orgId) {
+      if (orgId === this.user.orgId) {
+        return
+      }
+      switchOrg(orgId).then(() => {
+        window.location.reload()
+      })
     }
   }
 }
@@ -59,5 +73,9 @@ export default {
 }
 .avatar-menu {
   width: 150px;
+  .select {
+    font-weight: 500;
+    color: var(--primary-color);
+  }
 }
 </style>
