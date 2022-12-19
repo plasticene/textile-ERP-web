@@ -40,7 +40,7 @@ export default {
       meta: {
         title: '客户'
       },
-      component: EmptyPage
+      component: () => import('@/pages/settings/customer')
     },
     {
       path: 'supplier',

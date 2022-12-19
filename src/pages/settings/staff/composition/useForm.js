@@ -16,6 +16,9 @@ function useForm(form) {
   watch(
     () => form.value.id,
     val => {
+      if (!val) {
+        return
+      }
       formData.id = val
       formData.name = form.value.name
       formData.password = form.value.password
@@ -25,8 +28,8 @@ function useForm(form) {
       formData.gender = form.value.gender
       formData.mobile = form.value.mobile
       formData.status = form.value.status
-      formData.roleIds = form.value.roleList.map(e => e.id)
-      formData.roleNames = form.value.roleList.map(e => e.name)
+      formData.roleIds = form.value.roleList?.map(e => e.id) ?? []
+      formData.roleNames = form.value.roleList?.map(e => e.name) ?? []
       console.log('%c Line:29 🍡 formData', 'color:#33a5ff', formData)
     },
     { immediate: true }

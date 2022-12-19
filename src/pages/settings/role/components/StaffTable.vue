@@ -3,7 +3,7 @@
     <TAdvanceTable
       ref="tableRef"
       row-key="id"
-      :scroll="{ y: 'calc(100vh - 320px)' }"
+      :scroll="{ y: 'calc(100vh - 276px)' }"
       :columns="columns"
       :selected-rows="selectedRow"
       :load-data-request="getRoleStaffPageList"

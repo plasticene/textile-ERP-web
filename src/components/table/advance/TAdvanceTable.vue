@@ -140,7 +140,8 @@ export default {
   },
   mixins: [selectAlert, fullScreen],
   props: {
-    ...T.props,
+    // ...T.props,
+    ...omit(T.props, ['rowSelection']),
     childrenColumnName: { type: String, default: 'children' },
     columns: Array,
     loading: Boolean,

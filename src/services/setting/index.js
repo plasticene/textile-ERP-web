@@ -4,3 +4,5 @@ export * from './workshop'
 export * from './role'
 // 员工配置
 export * from './staff'
+// 客户配置
+export * from './customer'
