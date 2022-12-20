@@ -14,6 +14,7 @@
     >
       <div slot="action" slot-scope="{ record }">
         <a class="customer__button" @click="handleEdit(record)">编辑</a>
+        <a class="customer__button" @click="addTitle(record)">新增抬头</a>
         <a-popconfirm
           v-if="!record.machineCount"
           :title="`确定删除 ${record.name} 车间？`"
@@ -85,20 +86,27 @@
         </a-table>
       </template>
     </StandardTable>
-    <WorkshopFormModal
+    <CusFormModal
       :visible="showModal"
       :opt="opt"
       :form="formData"
+      @close="handleClose"
+    />
+    <TitleFormModal
+      :visible="showTitleModal"
+      :opt="opt"
+      :cus-id="currentCusId"
+      :form="titleForm"
       @close="handleClose"
     />
   </div>
 </template>
 <script name="customer" setup>
 import StandardTable from '@/components/table/StandardTable'
-import { delWorkshop, getCustomerPageList } from '@/services'
-import { ListTableConfig } from '@/utils/constant'
+import { delCustomer } from '@/services'
 
-import WorkshopFormModal from './components/WorkshopFormModal'
+import CusFormModal from './components/CusFormModal'
+import TitleFormModal from './components/TitleFormModal'
 import { useTable } from './composition'
 
 const {
@@ -110,7 +118,10 @@ const {
   pagination,
   opt,
   showModal,
+  showTitleModal,
+  currentCusId,
   formData,
+  titleForm,
   getTableData
 } = useTable()
 const vm = getCurrentInstance().proxy
@@ -123,7 +134,6 @@ const onChange = pagination => {
 const handleAdd = () => {
   opt.value = 'add'
   showModal.value = true
-  console.log('add')
 }
 
 const handleEdit = record => {
@@ -142,22 +152,23 @@ const initFormData = () => {
 }
 const handleClose = fresh => {
   showModal.value = false
+  showTitleModal.value = false
   initFormData()
   if (fresh) {
-    tableRef.value.reload()
+    getTableData()
   }
 }
 const handleDel = record => {
-  delWorkshop(record.id).then(() => {
-    vm.$message.success('车间删除成功')
-    tableRef.value.reload()
+  delCustomer(record.id).then(() => {
+    vm.$message.success('客户删除成功')
+    getTableData()
   })
 }
-const router = useRouter()
-// 跳转到机台列表界面，并过滤车间
-const viewMachineList = record => {
-  console.log('%c Line:90 🥥 record', 'color:#93c0a4', record)
-  router.push('/machine/list')
+const addTitle = record => {
+  opt.value = 'add'
+  currentCusId.value = record.id
+  showTitleModal.value = true
+  titleForm.value = {}
 }
 </script>
 <style lang="less" scoped>

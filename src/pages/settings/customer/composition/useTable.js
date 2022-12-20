@@ -118,12 +118,15 @@ function useTable() {
   const tableData = ref([])
   const opt = ref('add')
   const showModal = ref(false)
+  const showTitleModal = ref(false)
+  const currentCusId = ref(null)
   const formData = reactive({
     name: '',
-    location: '',
+    address: '',
     remark: '',
     id: undefined
   })
+  const titleForm = ref({})
   const getTableData = () => {
     getCustomerPageList({
       pageNo: pagination.value.current,
@@ -143,7 +146,10 @@ function useTable() {
     tableData,
     opt,
     showModal,
+    showTitleModal,
+    currentCusId,
     formData,
+    titleForm,
     getTableData
   }
 }

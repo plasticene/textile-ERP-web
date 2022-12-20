@@ -2,7 +2,7 @@
   <div class="form">
     <a-modal
       :visible="visible"
-      :title="opt === 'add' ? '新增岗位' : '修改岗位'"
+      :title="opt === 'add' ? '新增岗位' : '编辑岗位'"
       :confirm-loading="confirmLoading"
       row-key="id"
       @ok="handleOk"

@@ -3,7 +3,7 @@ function useForm(form) {
   const formRef = ref(null)
   const formData = reactive({
     name: '',
-    location: '',
+    address: '',
     remark: ''
   })
   watch(
@@ -11,14 +11,14 @@ function useForm(form) {
     val => {
       formData.id = val
       formData.name = form.value.name
-      formData.location = form.value.location
+      formData.address = form.value.address
       formData.remark = form.value.remark
     },
     { immediate: true }
   )
   const rules = reactive({
-    name: [{ required: true, message: '请输入车间名称', trigger: 'blur' }],
-    location: [{ required: true, message: '请输入车间位置', trigger: 'blur' }]
+    name: [{ required: true, message: '请输入客户姓名', trigger: 'blur' }],
+    address: [{ required: true, message: '请输入客户地址', trigger: 'blur' }]
   })
 
   return { confirmLoading, formRef, rules, formData }
