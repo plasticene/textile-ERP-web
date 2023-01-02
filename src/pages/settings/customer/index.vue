@@ -15,19 +15,12 @@
       <div slot="action" slot-scope="{ record }">
         <a class="customer__button" @click="handleEdit(record)">编辑</a>
         <a class="customer__button" @click="addTitle(record)">新增抬头</a>
-        <a-popconfirm
-          v-if="!record.machineCount"
-          :title="`确定删除 ${record.name} 车间？`"
-          ok-text="确定"
-          cancel-text="取消"
-          @confirm="handleDel(record)"
+        <a
+          class="customer__button customer__button--red"
+          @click="handleDel(record)"
         >
-          <a class="customer__button customer__button--red">删除</a>
-        </a-popconfirm>
-        <a-tooltip v-else>
-          <template slot="title">该车间已关联机台，不可删除</template>
-          <a-button type="link" disabled>删除</a-button>
-        </a-tooltip>
+          删除
+        </a>
       </div>
       <template slot="expandedRowRender" slot-scope="{ record }">
         <a-table
@@ -36,20 +29,18 @@
           :pagination="false"
         >
           <div slot="action" slot-scope="text, record">
-            <a class="customer__button" @click="handleEdit(record)">编辑</a>
-            <a-popconfirm
-              v-if="!record.machineCount"
-              :title="`确定删除 ${record.name} 车间？`"
-              ok-text="确定"
-              cancel-text="取消"
-              @confirm="handleDel(record)"
+            <a
+              class="customer__button"
+              @click="handleTitleEdit(record, 'delivery')"
             >
-              <a class="customer__button customer__button--red">删除</a>
-            </a-popconfirm>
-            <a-tooltip v-else>
-              <template slot="title">该车间已关联机台，不可删除</template>
-              <a-button type="link" disabled>删除</a-button>
-            </a-tooltip>
+              编辑
+            </a>
+            <a
+              class="customer__button customer__button--red"
+              @click="handleTitleDel(record, 'delivery')"
+            >
+              删除
+            </a>
           </div>
         </a-table>
         <a-table
@@ -68,20 +59,18 @@
             <span>{{ text }}</span>
           </div>
           <div slot="action" slot-scope="text, record">
-            <a class="customer__button" @click="handleEdit(record)">编辑</a>
-            <a-popconfirm
-              v-if="!record.machineCount"
-              :title="`确定删除 ${record.name} 车间？`"
-              ok-text="确定"
-              cancel-text="取消"
-              @confirm="handleDel(record)"
+            <a
+              class="customer__button"
+              @click="handleTitleEdit(record, 'invoice')"
             >
-              <a class="customer__button customer__button--red">删除</a>
-            </a-popconfirm>
-            <a-tooltip v-else>
-              <template slot="title">该车间已关联机台，不可删除</template>
-              <a-button type="link" disabled>删除</a-button>
-            </a-tooltip>
+              编辑
+            </a>
+            <a
+              class="customer__button customer__button--red"
+              @click="handleTitleDel(record, 'invoice')"
+            >
+              删除
+            </a>
           </div>
         </a-table>
       </template>
@@ -103,7 +92,7 @@
 </template>
 <script name="customer" setup>
 import StandardTable from '@/components/table/StandardTable'
-import { delCustomer } from '@/services'
+import { delCustomer, delDeliveryTitle, delInvoiceTitle } from '@/services'
 
 import CusFormModal from './components/CusFormModal'
 import TitleFormModal from './components/TitleFormModal'
@@ -141,14 +130,15 @@ const handleEdit = record => {
   showModal.value = true
   formData.id = record.id
   formData.name = record.name
-  formData.location = record.location
+  formData.address = record.address
   formData.remark = record.remark
 }
 const initFormData = () => {
   formData.name = ''
-  formData.location = ''
+  formData.address = ''
   formData.remark = ''
   formData.id = undefined
+  titleForm.value = {}
 }
 const handleClose = fresh => {
   showModal.value = false
@@ -159,9 +149,34 @@ const handleClose = fresh => {
   }
 }
 const handleDel = record => {
-  delCustomer(record.id).then(() => {
-    vm.$message.success('客户删除成功')
-    getTableData()
+  vm.$confirm({
+    title: '确定删除该客户吗？',
+    content: '删除后，新建订单时将选不到该客户。',
+    onOk() {
+      delCustomer(record.id).then(() => {
+        vm.$message.success('客户删除成功')
+        getTableData()
+      })
+    },
+    onCancel() {}
+  })
+}
+const handleTitleDel = (record, type) => {
+  vm.$confirm({
+    title: '确定删除该抬头吗？',
+    content: '删除后，新建订单时将选不到该抬头。',
+    onOk() {
+      type === 'invoice'
+        ? delInvoiceTitle(record.id).then(() => {
+            vm.$message.success('开票抬头删除成功')
+            getTableData()
+          })
+        : delDeliveryTitle(record.id).then(() => {
+            vm.$message.success('发货抬头删除成功')
+            getTableData()
+          })
+    },
+    onCancel() {}
   })
 }
 const addTitle = record => {
@@ -169,6 +184,12 @@ const addTitle = record => {
   currentCusId.value = record.id
   showTitleModal.value = true
   titleForm.value = {}
+}
+const handleTitleEdit = (record, type) => {
+  opt.value = 'edit'
+  showTitleModal.value = true
+  titleForm.value = record
+  titleForm.value.titleType = type
 }
 </script>
 <style lang="less" scoped>

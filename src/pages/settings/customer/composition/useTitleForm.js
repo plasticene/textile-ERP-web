@@ -7,6 +7,12 @@ function useTitleForm(form) {
     () => form.value.id,
     () => {
       formData.value = form.value
+      console.log(
+        '%c Line:10 🥝 formData.value',
+        'color:#ffdd4d',
+        formData.value
+      )
+      titleType.value = formData.value.titleType
       // formData.id = val
       // formData.name = form.value.name
       // formData.address = form.value.address

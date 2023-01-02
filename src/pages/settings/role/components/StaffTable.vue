@@ -93,6 +93,7 @@ const handleDel = ids => {
       }).then(() => {
         vm.$message.success('员工移除成功')
         tableRef.value.reload()
+        selectedRow.value = []
         getStaffList(roleId.value)
       })
     }

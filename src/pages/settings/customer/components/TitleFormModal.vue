@@ -63,9 +63,9 @@
         <a-form-model-item label="开户账号" prop="bankAccount">
           <a-input v-model="formData.bankAccount" :max-length="20" />
         </a-form-model-item>
-        <a-form-model-item label="备注" prop="remark">
+        <!-- <a-form-model-item label="备注" prop="remark">
           <a-input v-model="formData.remark" type="textarea" />
-        </a-form-model-item>
+        </a-form-model-item> -->
       </a-form-model>
     </a-modal>
   </div>
