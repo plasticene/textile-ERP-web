@@ -6,3 +6,5 @@ export * from './role'
 export * from './staff'
 // 客户配置
 export * from './customer'
+// 供应商配置
+export * from './supplier'

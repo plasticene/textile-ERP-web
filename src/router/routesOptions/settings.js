@@ -48,7 +48,7 @@ export default {
       meta: {
         title: '供应商'
       },
-      component: EmptyPage
+      component: () => import('@/pages/settings/supplier')
     },
     {
       path: 'factory',
