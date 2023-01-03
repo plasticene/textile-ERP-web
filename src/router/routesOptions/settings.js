@@ -56,7 +56,7 @@ export default {
       meta: {
         title: '代工厂'
       },
-      component: EmptyPage
+      component: () => import('@/pages/settings/factory')
     },
     {
       path: 'company',

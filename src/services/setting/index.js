@@ -8,3 +8,5 @@ export * from './staff'
 export * from './customer'
 // 供应商配置
 export * from './supplier'
+// 代工厂配置
+export * from './factory'
