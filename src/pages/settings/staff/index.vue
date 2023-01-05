@@ -10,13 +10,10 @@
       v-bind="ListTableConfig"
     >
       <template #header>
-        <a-button type="primary" size="small" @click="handleAdd">
-          新增员工
-        </a-button>
+        <a-button type="primary" @click="handleAdd">新增员工</a-button>
         <div class="staff__filter">
           <a-select
             v-model="filterForm.status"
-            size="small"
             class="mr-4x"
             style="width: 120px"
             :options="STAFF_STATUS"
@@ -24,7 +21,6 @@
           />
           <a-select
             v-model="filterForm.roleId"
-            size="small"
             class="mr-4x"
             style="width: 120px"
             placeholder="岗位"
@@ -37,7 +33,6 @@
           </a-select>
           <a-input
             v-model="filterForm.keyword"
-            size="small"
             style="width: 200px"
             placeholder="员工姓名/手机号码"
             @change="handleSearch"
@@ -91,7 +86,7 @@ const vm = getCurrentInstance().proxy
 const filterForm = ref({
   status: 0,
   keyword: '',
-  roleId: null
+  roleId: undefined
 })
 const transformParams = filter => {
   filter.status = filterForm.value.status

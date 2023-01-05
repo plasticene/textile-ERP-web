@@ -5,13 +5,11 @@ function useTitleForm(form) {
   const titleType = ref('delivery')
   watch(
     () => form.value.id,
-    () => {
+    val => {
+      if (!val) {
+        return
+      }
       formData.value = form.value
-      console.log(
-        '%c Line:10 🥝 formData.value',
-        'color:#ffdd4d',
-        formData.value
-      )
       titleType.value = formData.value.titleType
       // formData.id = val
       // formData.name = form.value.name

@@ -22,8 +22,12 @@ function useForm(form) {
     { immediate: true }
   )
   const rules = reactive({
-    name: [{ required: true, message: '请输入供应商名称', trigger: 'blur' }]
-    // location: [{ required: true, message: '请输入车间位置', trigger: 'blur' }]
+    name: [{ required: true, message: '请输入供应商名称', trigger: 'blur' }],
+    contactName: [{ required: true, message: '请输入联系人', trigger: 'blur' }],
+    contactNumber: [
+      { required: true, message: '请输入联系电话', trigger: 'blur' }
+    ],
+    address: [{ required: true, message: '请输入公司地址', trigger: 'blur' }]
   })
 
   return { confirmLoading, formRef, rules, formData }

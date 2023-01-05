@@ -12,12 +12,9 @@
       @selectedRowChange="onSelectChange"
     >
       <template #header>
-        <a-button type="primary" size="small" @click="handleAdd">
-          添加员工
-        </a-button>
+        <a-button type="primary" @click="handleAdd">添加员工</a-button>
         <a-button
           class="ml-4x"
-          size="small"
           :disabled="!selectedRowKeys.length"
           @click="handleDel(selectedRowKeys)"
         >

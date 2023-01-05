@@ -18,8 +18,9 @@
           <a-select
             v-model="formData.userIds"
             mode="multiple"
-            size="small"
+            option-filter-prop="children"
             style="width: 200px"
+            :filter-option="filterOption"
           >
             <a-select-option v-for="item in staffList" :key="item.id">
               {{ item.name }}
@@ -51,6 +52,13 @@ const { visible, staffList, roleId } = toRefs(props)
 const { formRef, rules, formData } = useForm()
 
 const emit = defineEmits(['close'])
+const filterOption = (input, option) => {
+  return (
+    option.componentOptions.children[0].text
+      .toLowerCase()
+      .indexOf(input.toLowerCase()) >= 0
+  )
+}
 const handleOk = () => {
   formRef.value.validate(valid => {
     if (valid) {

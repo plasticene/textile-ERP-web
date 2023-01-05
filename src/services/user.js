@@ -1,4 +1,4 @@
-import { LOGIN, ROUTES } from '@/services/api'
+import { ROUTES } from '@/services/api'
 import { METHOD, removeAuthorization, request } from '@/utils/request'
 const { POST, GET } = METHOD
 /**

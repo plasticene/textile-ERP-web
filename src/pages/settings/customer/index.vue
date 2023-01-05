@@ -1,6 +1,6 @@
 <template>
   <div class="customer page-list">
-    <a-button class="mb-4x" type="primary" size="small" @click="handleAdd">
+    <a-button class="mb-4x" type="primary" @click="handleAdd">
       新增客户
     </a-button>
     <StandardTable
@@ -201,6 +201,12 @@ const handleTitleEdit = (record, type) => {
     &--red {
       color: var(--danger-color);
     }
+  }
+  :deep(.ant-table-row) {
+    background: #fff;
+  }
+  .ant-table-wrapper + .ant-table-wrapper {
+    margin: 10px -12px -11px;
   }
 }
 </style>

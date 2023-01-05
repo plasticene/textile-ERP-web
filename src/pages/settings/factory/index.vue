@@ -9,9 +9,7 @@
       v-bind="ListTableConfig"
     >
       <template #header>
-        <a-button type="primary" size="small" @click="handleAdd">
-          新增代工厂
-        </a-button>
+        <a-button type="primary" @click="handleAdd">新增代工厂</a-button>
       </template>
       <!-- <template #filterBar>
         <a-input v-decorator="['name']" placeholder="请输入职责" />

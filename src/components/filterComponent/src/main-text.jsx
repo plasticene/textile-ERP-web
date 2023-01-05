@@ -1,9 +1,10 @@
 import './index.less'
 
-import { Button, Col, Form, Row, Space } from 'ant-design-vue'
+import { Col, Form, Row } from 'ant-design-vue'
+// import { Button, Col, Form, Row, Space } from 'ant-design-vue'
 import { v4 as uuid } from 'uuid'
 
-import HButton from '@/components/HButton'
+// import HButton from '@/components/HButton'
 
 const colBind = {
   props: { xs: 12, md: 8, xl: 6, xxl: 6 }
@@ -56,24 +57,25 @@ const HFilterComponent = {
           <Form.Item>{child}</Form.Item>
         </Col>
       )
-    },
-    renderBtn(showMore) {
-      return (
-        <HButton
-          icon="double-right"
-          class={
-            showMore ? 'collapse-btn collapse-up' : 'collapse-btn collapse-down'
-          }
-          icon-only
-          onClick={this.handleToggle}
-        >
-          {showMore ? '收起' : '展开'}
-        </HButton>
-      )
     }
+    // renderBtn(showMore) {
+    //   return (
+    //     <HButton
+    //       icon="double-right"
+    //       class={
+    //         showMore ? 'collapse-btn collapse-up' : 'collapse-btn collapse-down'
+    //       }
+    //       icon-only
+    //       onClick={this.handleToggle}
+    //     >
+    //       {showMore ? '收起' : '展开'}
+    //     </HButton>
+    //   )
+    // }
   },
   render() {
-    const { foldSize, size, renderItem, renderBtn } = this
+    const { foldSize, size, renderItem } = this
+    // const { foldSize, size, renderItem, renderBtn } = this
     const collapseSize = foldSize || size
     const children = this.$slots.default.filter(c => c.tag)
     const isColl = children.length > collapseSize

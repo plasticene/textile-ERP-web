@@ -87,7 +87,6 @@ const components = {
   HTaskNode,
   TAdvanceTable
 }
-const isH = /^H/
 
 export {
   ApprovalForm,

@@ -47,7 +47,7 @@ const handleOk = () => {
   formRef.value.validate(valid => {
     if (valid) {
       const param = {
-        id: formData.id,
+        id: form.value.id,
         name: formData.name
       }
       if (opt.value === 'add') {
