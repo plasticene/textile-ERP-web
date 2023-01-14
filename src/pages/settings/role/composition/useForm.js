@@ -1,5 +1,6 @@
-function useForm(form) {
+function useForm() {
   const formRef = ref(null)
+  const confirmLoading = ref(false)
   const formData = reactive({
     name: '',
     userIds: []
@@ -9,19 +10,7 @@ function useForm(form) {
       { required: true, message: '请选择需要关联的员工', trigger: 'change' }
     ]
   })
-  watch(
-    () => form.value.id,
-    val => {
-      if (!val) {
-        return
-      }
-      formData.name = form.value.name
-    },
-    {
-      immediate: true
-    }
-  )
-  return { formRef, rules, formData }
+  return { formRef, rules, formData, confirmLoading }
 }
 
 export { useForm }

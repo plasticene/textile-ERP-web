@@ -40,9 +40,22 @@ const props = defineProps({
   }
 })
 const { opt, visible, form } = toRefs(props)
-const { confirmLoading, formRef, rules, formData } = useForm(form)
+const { confirmLoading, formRef, rules, formData } = useForm()
 
 const emit = defineEmits(['close'])
+
+watch(
+  () => form.value.id,
+  val => {
+    if (!val) {
+      return
+    }
+    formData.name = form.value.name
+  },
+  {
+    immediate: true
+  }
+)
 const handleOk = () => {
   formRef.value.validate(valid => {
     if (valid) {

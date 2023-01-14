@@ -40,6 +40,7 @@ const onchecked = checkedKeys => {
 .menu-list {
   height: 100%;
   margin-left: 24px;
+  overflow-y: auto;
   &__header {
     display: flex;
     align-items: center;

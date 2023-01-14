@@ -34,6 +34,12 @@ const current = computed(() => {
   }
   &__content {
     flex: 1;
+    :deep(.ant-tabs) {
+      height: 100%;
+    }
+    :deep(.ant-tabs-content) {
+      height: calc(100% - 44px);
+    }
   }
 }
 </style>
