@@ -33,12 +33,19 @@
           </a-select>
           <a-input
             v-model="filterForm.keyword"
+            class="mr-4x"
             style="width: 200px"
             placeholder="员工姓名/手机号码"
             @change="handleSearch"
           >
             <a-icon slot="suffix" type="search" />
           </a-input>
+          <a-range-picker
+            v-model="filterForm.dataRange"
+            style="width: 200px"
+            :placeholder="['入职日期', '起止范围']"
+            @change="handleSearch"
+          />
         </div>
       </template>
       <div slot="gender" slot-scope="{ text }">
@@ -86,11 +93,14 @@ const vm = getCurrentInstance().proxy
 const filterForm = ref({
   status: 0,
   keyword: '',
-  roleId: undefined
+  roleId: undefined,
+  dataRange: []
 })
 const transformParams = filter => {
   filter.status = filterForm.value.status
   filter.keyword = filterForm.value.keyword
+  filter.startEntryTime = filterForm.value.dataRange[0]?.format('YYYY-MM-DD')
+  filter.endEntryTime = filterForm.value.dataRange[1]?.format('YYYY-MM-DD')
   filter.roleId = filterForm.value.roleId
   return filter
 }
