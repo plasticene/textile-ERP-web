@@ -9,7 +9,11 @@
         :key="item.id"
         @click="switchOrg(item.id)"
       >
-        <span :class="user.orgId === item.id ? 'select' : ''">
+        <span
+          class="list-item"
+          :title="item.name"
+          :class="user.orgId === item.id ? 'select' : ''"
+        >
           {{ item.name }}
         </span>
       </a-menu-item>
@@ -73,6 +77,11 @@ export default {
 }
 .avatar-menu {
   width: 150px;
+  .list-item {
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+  }
   .select {
     font-weight: 500;
     color: var(--primary-color);

@@ -24,7 +24,7 @@ export default {
       meta: {
         title: '原料管理'
       },
-      component: EmptyPage
+      component: () => import('@/pages/material/config')
     },
     {
       path: 'attr-config',

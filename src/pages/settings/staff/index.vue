@@ -99,8 +99,12 @@ const filterForm = ref({
 const transformParams = filter => {
   filter.status = filterForm.value.status
   filter.keyword = filterForm.value.keyword
-  filter.startEntryTime = filterForm.value.dataRange[0]?.format('YYYY-MM-DD')
-  filter.endEntryTime = filterForm.value.dataRange[1]?.format('YYYY-MM-DD')
+  filter.startEntryTime = filterForm.value.dataRange[0]
+    ? `${filterForm.value.dataRange[0].format('YYYY-MM-DD')} 00:00:00`
+    : undefined
+  filter.endEntryTime = filterForm.value.dataRange[1]
+    ? `${filterForm.value.dataRange[1].format('YYYY-MM-DD')} 23:59:59`
+    : undefined
   filter.roleId = filterForm.value.roleId
   return filter
 }
