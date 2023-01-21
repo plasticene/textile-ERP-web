@@ -1,4 +1,5 @@
 export * from './file'
+export * from './machine'
 export * from './material'
 export * from './setting'
 export * from './user'

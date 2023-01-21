@@ -16,7 +16,7 @@ export default {
       meta: {
         title: '机台管理'
       },
-      component: EmptyPage
+      component: () => import('@/pages/machine/list')
     },
     {
       path: 'maintain',

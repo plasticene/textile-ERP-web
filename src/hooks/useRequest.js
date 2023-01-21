@@ -113,7 +113,7 @@ function useRequest(request, options = {}) {
       requestRef
         .value(executeParams ? executeParams : getParams ? getParams() : params)
         .then(res => {
-          const content = get(res, 'data.content', defaultData)
+          const content = get(res, 'data', defaultData)
           const beforeToRefContent = beforeToRef ? beforeToRef(content) : false
           data.value = beforeToRefContent ? beforeToRefContent : content
 
