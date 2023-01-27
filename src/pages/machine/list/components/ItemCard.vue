@@ -69,6 +69,7 @@ const props = defineProps({
   }
 })
 const { value, info } = toRefs(props)
+// eslint-disable-next-line
 const [state, setState] = useVModel({ value, defaultValue: '' })
 const emit = defineEmits(['action'])
 const handleAction = (key, item) => {

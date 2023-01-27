@@ -82,25 +82,10 @@
   </div>
 </template>
 <script name="FilterItems" setup>
-import { useRequest } from '@/hooks'
-import { getMachineSetList, getWorkshopPageList } from '@/services'
+import { useFilter } from '../composition'
 const formData = ref({})
-const { data: workshopList } = useRequest(getWorkshopPageList, {
-  defaultData: [],
-  params: {
-    pageNo: 1,
-    pageSize: 1000
-  },
-  beforeToRef(res) {
-    return res.list
-  }
-})
-const { data: machineTypeList } = useRequest(getMachineSetList, {
-  defaultData: [],
-  beforeToRef(res) {
-    return res.list
-  }
-})
+
+const { workshopList, machineTypeList } = useFilter()
 const emit = defineEmits(['change'])
 const emitChange = () => {
   emit('change', formData.value)

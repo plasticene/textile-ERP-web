@@ -20,27 +20,28 @@
       </div>
       <div v-for="e in new Array(10)" :key="e" class="machine-list__card"></div>
     </div>
-    <!-- <FactoryFormModal
+    <FormModal
+      v-if="type === 'add'"
       :visible="showModal"
       :opt="opt"
       :form="formData"
       @close="handleClose"
-    /> -->
+    />
   </div>
 </template>
 <script name="machine-list" setup>
 // import { delFactory } from '@/services'
 
-// import FactoryFormModal from './components/FactoryFormModal'
 import FilterItems from './components/FilterItems'
+import FormModal from './components/FormModal'
 import ItemCard from './components/ItemCard'
 import { useList } from './composition'
 
-const { opt, showModal, list, getListData } = useList()
-console.log('%c Line:39 🥚 list', 'color:#6ec1c2', list)
+const { opt, type, showModal, list, getListData, formData } = useList()
 // const vm = getCurrentInstance().proxy
 const handleAdd = () => {
   opt.value = 'add'
+  type.value = 'add'
   showModal.value = true
   console.log('add')
 }
@@ -55,21 +56,16 @@ const handleAdd = () => {
 //   formData.address = record.address
 //   formData.remark = record.remark
 // }
-// const initFormData = () => {
-//   formData.name = ''
-//   formData.contactName = ''
-//   formData.contactNumber = ''
-//   formData.address = ''
-//   formData.remark = ''
-//   formData.id = undefined
-// }
-// const handleClose = fresh => {
-//   showModal.value = false
-//   initFormData()
-//   if (fresh) {
-//     tableRef.value.reload()
-//   }
-// }
+const initFormData = () => {
+  formData.value = {}
+}
+const handleClose = fresh => {
+  showModal.value = false
+  initFormData()
+  if (fresh) {
+    getListData()
+  }
+}
 // const handleDel = record => {
 //   vm.$confirm({
 //     title: '确定删除该代工厂吗？',
